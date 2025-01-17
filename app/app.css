@@ -2,9 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: #F5F7FA;
+  --primary: #343C6A;
+  --blue: #396AFF;
+  --accent: #718EBF;
+  --sidebar: #B1B1B1;
+  --sidebar-active: #232323;
+}
+
+.dark {
+  --background: #F5F7FA;
+  --primary: #343C6A;
+  --blue: #396AFF;
+  --accent: #718EBF;
+  --sidebar: #B1B1B1;
+  --sidebar-active: #232323;
+}
+
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  background-color: var(--background);
+  color: var(--foreground);
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
