@@ -3,21 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --background: #F5F7FA;
-  --primary: #343C6A;
-  --blue: #396AFF;
-  --accent: #718EBF;
-  --sidebar: #B1B1B1;
+  --base: #ffffff;
+
+  /* Base colors */
+  --background: #f5f7fa;
+  --foreground: #718ebf;
+
+  /* UI Elements */
+  --input: #edf1f7;
+  --button: #232323;
+
+  /* Brand colors */
+  --primary: #343c6a;
+  --primary-blue: #396aff;
+
+  /* Navigation */
+  --sidebar-text: #b1b1b1;
   --sidebar-active: #232323;
 }
 
 .dark {
-  --background: #F5F7FA;
-  --primary: #343C6A;
-  --blue: #396AFF;
-  --accent: #718EBF;
-  --sidebar: #B1B1B1;
-  --sidebar-active: #232323;
+  --base: #111827;
 }
 
 html,

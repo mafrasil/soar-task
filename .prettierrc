@@ -1,8 +1,5 @@
 {
-  "plugins": [
-    "prettier-plugin-classnames",
-    "prettier-plugin-tailwindcss"
-  ],
+  "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-classnames"],
   "tabWidth": 2,
   "semi": true,
   "singleQuote": false,

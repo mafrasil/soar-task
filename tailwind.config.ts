@@ -5,12 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
-        primary: 'var(--primary)',
-        'primary-hover': 'var(--primary-hover)',
-        muted: 'var(--muted)',
-        'muted-foreground': 'var(--muted-foreground)',
+        base: "var(--base)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        input: "var(--input)",
+        button: "var(--button)",
+        primary: "var(--primary)",
+        "primary-blue": "var(--primary-blue)",
+        "sidebar-text": "var(--sidebar-text)",
+        "sidebar-active": "var(--sidebar-active)",
       },
       fontFamily: {
         sans: [
