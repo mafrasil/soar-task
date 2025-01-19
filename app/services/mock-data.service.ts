@@ -1,11 +1,8 @@
 import { faker } from "@faker-js/faker";
 import type { Contact } from "~/types";
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export const mockData = {
   async getTransactions() {
-    await delay(500);
     return Array.from({ length: 5 }, () => ({
       id: faker.string.uuid(),
       icon: faker.helpers.arrayElement(["credit-card", "paypal", "dollar"]),
@@ -16,17 +13,35 @@ export const mockData = {
   },
 
   async getContacts(): Promise<Contact[]> {
-    await delay(500);
-    return Array.from({ length: 4 }, () => ({
-      id: faker.string.uuid(),
-      name: faker.person.fullName(),
-      role: faker.person.jobTitle(),
-      avatar: faker.image.avatar(),
-    }));
+    return [
+      {
+        id: "1",
+        name: "Austin Distel",
+        role: "CEO",
+        avatar: "/photos/austin-distel-7bMdiIqz_J4-unsplash.png",
+      },
+      {
+        id: "2",
+        name: "Emanuel Minca",
+        role: "Director",
+        avatar: "/photos/emanuel-minca-jYv069cQuB8-unsplash.png",
+      },
+      {
+        id: "3",
+        name: "Marcel Strauss",
+        role: "Designer",
+        avatar: "/photos/marcel-strauss-Uc_tOqa_jDY-unsplash.png",
+      },
+      {
+        id: "4",
+        name: "Julia Volk",
+        role: "Developer",
+        avatar: "/photos/pexels-julia-volk-5273755.png",
+      },
+    ];
   },
 
   async getCards() {
-    await delay(500);
     return Array.from({ length: 3 }, () => ({
       id: faker.string.uuid(),
       balance: faker.number.int({ min: 100, max: 1_250_000 }),
@@ -40,7 +55,6 @@ export const mockData = {
   },
 
   async getWeeklyActivity() {
-    await delay(500);
     return Array.from({ length: 7 }, () => ({
       date: faker.date.recent().toISOString(),
       deposits: faker.number.int({ min: 100, max: 2000 }),
@@ -49,17 +63,15 @@ export const mockData = {
   },
 
   async getExpenseStatistics() {
-    await delay(500);
     return [
-      { category: "Entertainment", amount: faker.number.float({ min: 100, max: 1000 }) },
-      { category: "Bill Expenses", amount: faker.number.float({ min: 200, max: 1500 }) },
-      { category: "Investment", amount: faker.number.float({ min: 500, max: 2000 }) },
-      { category: "Others", amount: faker.number.float({ min: 100, max: 800 }) },
+      { category: "Entertainment", amount: faker.number.float({ min: 100, max: 200 }) },
+      { category: "Bill Expenses", amount: faker.number.float({ min: 100, max: 200 }) },
+      { category: "Investment", amount: faker.number.float({ min: 100, max: 200 }) },
+      { category: "Others", amount: faker.number.float({ min: 100, max: 200 }) },
     ];
   },
 
   async getBalanceHistory() {
-    await delay(500);
     return Array.from({ length: 7 }, (_, i) => ({
       date: faker.date.recent({ days: (i + 1) * 30 }).toISOString(),
       balance: faker.number.int({ min: 100, max: 1000 }),

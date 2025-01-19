@@ -5,6 +5,7 @@ import { Input } from "~/components/ui/input";
 import { MenuIcon, SearchIcon, BellIcon, SettingsIcon } from "lucide-react";
 import { Title } from "./title";
 import { useUserStore } from "~/stores/user.store";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface HeaderProps {
   isOpen: boolean;
@@ -21,7 +22,17 @@ export function Header({ isOpen, onClose, title }: HeaderProps) {
           <IconButton variant="ghost" className="md:hidden" onClick={() => !isOpen && onClose()}>
             <MenuIcon className="w-5 h-5" />
           </IconButton>
-          <Title>{title}</Title>
+          <AnimatePresence mode="wait">
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              exit={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              key={title}
+            >
+              <Title>{title}</Title>
+            </motion.div>
+          </AnimatePresence>
           <Avatar src={user?.avatar} alt={user?.name || ""} size="sm" className="md:hidden" />
         </div>
         <div className="px-6 pb-4 md:pb-0 md:flex-1 md:px-4">

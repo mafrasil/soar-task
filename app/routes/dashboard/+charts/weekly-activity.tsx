@@ -1,5 +1,14 @@
 import { Card } from "~/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, Legend, ResponsiveContainer, CartesianGrid } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Legend,
+  ResponsiveContainer,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
 import { Title } from "~/components/ui/title";
 import { Column } from "~/components/ui/column";
 
@@ -39,14 +48,13 @@ export function WeeklyActivity({ data, span }: WeeklyActivityProps) {
     <Column span={span}>
       <Title className="mb-4">Weekly Activity</Title>
       <Card className="p-6">
-        <div className="h-[300px]">
+        <div className="h-[250px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}
               margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
               barGap={8}
             >
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f5f5f5" />
               <XAxis
                 dataKey="day"
                 axisLine={false}
@@ -59,6 +67,15 @@ export function WeeklyActivity({ data, span }: WeeklyActivityProps) {
                 tickLine={false}
                 tick={{ fill: "#94A3B8", fontSize: 12 }}
                 dx={-10}
+              />
+              <Tooltip
+                cursor={{ fill: "transparent" }}
+                contentStyle={{
+                  backgroundColor: "#fff",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "6px",
+                  padding: "8px",
+                }}
               />
               <Legend
                 verticalAlign="top"

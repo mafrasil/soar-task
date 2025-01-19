@@ -5,6 +5,9 @@ import { Card } from "~/components/ui/card";
 import { Title } from "~/components/ui/title";
 import { cn } from "~/lib/utils";
 import { Column } from "~/components/ui/column";
+import React from "react";
+import { ChevronRight } from "lucide-react";
+import { mockData } from "~/services/mock-data.service";
 
 type Contact = {
   id: string;
@@ -13,62 +16,91 @@ type Contact = {
   avatar: string;
 };
 
-const contacts: Contact[] = [
-  {
-    id: "1",
-    name: "Livia Bator",
-    role: "CEO",
-    avatar: "/avatars/livia.jpg",
-  },
-  {
-    id: "2",
-    name: "Randy Press",
-    role: "Director",
-    avatar: "/avatars/randy.jpg",
-  },
-  {
-    id: "3",
-    name: "Workman",
-    role: "Designer",
-    avatar: "/avatars/workman.jpg",
-  },
-];
-
 type QuickTransferProps = {
   span?: 1 | 2 | 3;
 };
 
 export function QuickTransfer({ span }: QuickTransferProps) {
+  const [amount, setAmount] = React.useState("525.50");
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [contacts, setContacts] = React.useState<Contact[]>([]);
+
+  React.useEffect(() => {
+    // Fetch contacts when component mounts
+    const loadContacts = async () => {
+      const data = await mockData.getContacts();
+      setContacts(data);
+    };
+    loadContacts();
+  }, []);
+
+  const contactsPerPage = 3;
+  const totalPages = Math.ceil(contacts.length / contactsPerPage);
+
+  const visibleContacts = contacts.slice(
+    currentPage * contactsPerPage,
+    currentPage * contactsPerPage + contactsPerPage
+  );
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
   return (
     <Column span={span}>
       <Title className="mb-4">Quick Transfer</Title>
       <Card className="p-6">
         <div className="space-y-6">
           {/* Contact List */}
-          <div className="flex gap-4">
-            {contacts.map((contact) => (
-              <div key={contact.id} className="text-center">
-                <Avatar
-                  src={contact.avatar}
-                  alt={contact.name}
-                  className="h-16 w-16 mx-auto mb-2"
-                />
-                <div className="font-medium">{contact.name}</div>
-                <div className="text-sm text-slate-500">{contact.role}</div>
+          <div className="relative flex">
+            <div className="flex-1 overflow-hidden">
+              <div
+                className="flex gap-2 transition-transform duration-300 ease-in-out pl-0"
+                style={{ transform: `translateX(-${currentPage * 100}%)` }}
+              >
+                {contacts.map((contact) => (
+                  <div key={contact.id} className="text-center flex-shrink-0 w-[32%]">
+                    <Avatar
+                      src={contact.avatar}
+                      alt={contact.name}
+                      className="size-20 mx-auto mb-2"
+                    />
+                    <div className="font-medium text-sm">{contact.name}</div>
+                    <div
+                      className={cn(
+                        "text-xs text-slate-500",
+                        contact.role.toLowerCase() === "ceo" && "font-semibold"
+                      )}
+                    >
+                      {contact.role}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-            <button className="flex items-center justify-center w-16 h-16 rounded-full bg-slate-100">
-              <span className="text-2xl text-slate-400">&gt;</span>
-            </button>
+            </div>
+            <div className="flex items-center pl-2">
+              <button
+                onClick={handleNextPage}
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200
+                  transition-colors"
+              >
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </button>
+            </div>
           </div>
 
           {/* Transfer Input */}
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-slate-500">Write Amount</label>
-              <Input type="text" value="525.50" className="text-2xl font-medium" />
+          <div className="flex items-center gap-4">
+            <span className="text-blue-400">Write Amount</span>
+            <div className="flex-1">
+              <Input
+                type="text"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="text-2xl font-medium bg-slate-50"
+              />
             </div>
-            <Button className="w-full gap-2">
+            <Button className="flex items-center gap-2 px-6 bg-black text-white hover:bg-black/90 rounded-full">
               Send
               <span className="inline-block rotate-45">
                 <svg

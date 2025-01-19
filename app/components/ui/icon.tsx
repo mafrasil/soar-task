@@ -50,8 +50,8 @@ export function Icon({ name, className, ...props }: IconProps) {
           className={cn("size-6", className)}
           {...props}
         >
-          <circle cx="15" cy="15" r="15" fill="white" fill-opacity="0.5" />
-          <circle cx="29" cy="15" r="15" fill="white" fill-opacity="0.5" />
+          <circle cx="15" cy="15" r="15" fill="white" fillOpacity="0.5" />
+          <circle cx="29" cy="15" r="15" fill="white" fillOpacity="0.5" />
         </svg>
       );
     default:

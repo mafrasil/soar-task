@@ -1,5 +1,13 @@
 import { Card } from "~/components/ui/card";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 import { Title } from "~/components/ui/title";
 import { Column } from "~/components/ui/column";
 
@@ -7,16 +15,6 @@ type BalanceData = {
   month: string;
   balance: number;
 }[];
-
-const data: BalanceData = [
-  { month: "Jul", balance: 120 },
-  { month: "Aug", balance: 320 },
-  { month: "Sep", balance: 500 },
-  { month: "Oct", balance: 750 },
-  { month: "Nov", balance: 250 },
-  { month: "Dec", balance: 580 },
-  { month: "Jan", balance: 650 },
-];
 
 type BalanceHistoryProps = {
   data?: Array<{
@@ -46,7 +44,7 @@ export function BalanceHistory({ data: rawData, span }: BalanceHistoryProps) {
     <Column span={span}>
       <Title className="mb-4">Balance History</Title>
       <Card className="p-6">
-        <div className="h-[300px]">
+        <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
@@ -64,6 +62,14 @@ export function BalanceHistory({ data: rawData, span }: BalanceHistoryProps) {
                 stroke="#4F46E5"
                 strokeWidth={2}
                 fill="url(#balanceGradient)"
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#fff",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "6px",
+                  padding: "8px",
+                }}
               />
             </AreaChart>
           </ResponsiveContainer>

@@ -1,5 +1,5 @@
 import { Card } from "~/components/ui/card";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Title } from "~/components/ui/title";
 import { Column } from "~/components/ui/column";
 
@@ -28,7 +28,7 @@ export function ExpenseStatistics({ data, span }: ExpenseStatisticsProps) {
     <Column span={span}>
       <Title className="mb-4">Expense Statistics</Title>
       <Card className="p-6">
-        <div className="h-[300px]">
+        <div className="h-[250px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -38,13 +38,19 @@ export function ExpenseStatistics({ data, span }: ExpenseStatisticsProps) {
                 innerRadius={0}
                 outerRadius={120}
                 dataKey="value"
-                label={renderLabel}
-                labelLine={false}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#fff",
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "6px",
+                  padding: "8px",
+                }}
+              />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -52,21 +58,3 @@ export function ExpenseStatistics({ data, span }: ExpenseStatisticsProps) {
     </Column>
   );
 }
-
-const renderLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value, name }: any) => {
-  const RADIAN = Math.PI / 180;
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="middle">
-      <tspan x={x} y={y - 10} fontSize="16" fontWeight="500">
-        {value}%
-      </tspan>
-      <tspan x={x} y={y + 10} fontSize="12">
-        {name}
-      </tspan>
-    </text>
-  );
-};
