@@ -19,17 +19,36 @@ const data: BalanceData = [
 ];
 
 type BalanceHistoryProps = {
+  data?: Array<{
+    date: string;
+    balance: number;
+  }>;
   span?: 1 | 2 | 3;
 };
 
-export function BalanceHistory({ span }: BalanceHistoryProps) {
+export function BalanceHistory({ data: rawData, span }: BalanceHistoryProps) {
+  const chartData = rawData
+    ? rawData.map((item) => ({
+        month: new Date(item.date).toLocaleDateString("en-US", { month: "short" }),
+        balance: item.balance,
+      }))
+    : [
+        { month: "Jul", balance: 120 },
+        { month: "Aug", balance: 320 },
+        { month: "Sep", balance: 500 },
+        { month: "Oct", balance: 750 },
+        { month: "Nov", balance: 250 },
+        { month: "Dec", balance: 580 },
+        { month: "Jan", balance: 650 },
+      ];
+
   return (
     <Column span={span}>
       <Title className="mb-4">Balance History</Title>
       <Card className="p-6">
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="balanceGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.3} />

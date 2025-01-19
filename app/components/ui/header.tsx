@@ -4,6 +4,7 @@ import { Avatar } from "~/components/ui/avatar";
 import { Input } from "~/components/ui/input";
 import { MenuIcon, SearchIcon, BellIcon, SettingsIcon } from "lucide-react";
 import { Title } from "./title";
+import { useUserStore } from "~/stores/user.store";
 
 interface HeaderProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface HeaderProps {
 }
 
 export function Header({ isOpen, onClose, title }: HeaderProps) {
+  const user = useUserStore((state) => state.user);
   return (
     <header className="sticky top-0 bg-white z-30 md:ml-64">
       <div className="flex flex-col md:flex-row md:items-center md:h-16 md:container mx-auto">
@@ -20,7 +22,7 @@ export function Header({ isOpen, onClose, title }: HeaderProps) {
             <MenuIcon className="w-5 h-5" />
           </IconButton>
           <Title>{title}</Title>
-          <Avatar alt="Profile" size="sm" className="md:hidden" />
+          <Avatar src={user?.avatar} alt={user?.name || ""} size="sm" className="md:hidden" />
         </div>
         <div className="px-6 pb-4 md:pb-0 md:flex-1 md:px-4">
           <div className="max-w-md md:ml-auto">
@@ -38,7 +40,7 @@ export function Header({ isOpen, onClose, title }: HeaderProps) {
           <IconButton variant="ghost" size="sm">
             <SettingsIcon className="w-5 h-5" />
           </IconButton>
-          <Avatar alt="Eddy Cusuma" size="sm" />
+          <Avatar src={user?.avatar} alt={user?.name || ""} size="sm" />
         </div>
       </div>
     </header>

@@ -10,6 +10,7 @@ export default {
         foreground: "var(--foreground)",
         input: "var(--input)",
         button: "var(--button)",
+        border: "var(--border)",
         primary: "var(--primary)",
         "primary-blue": "var(--primary-blue)",
         "sidebar-text": "var(--sidebar-text)",

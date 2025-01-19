@@ -16,8 +16,8 @@ type TransactionListProps = {
 export function TransactionList({ transactions, span }: TransactionListProps) {
   return (
     <Column span={span}>
-      <Card className="p-6">
-        <div className="flex flex-col gap-6">
+      <Card className="p-6 aspect-[350/235] w-full">
+        <div className="flex flex-col gap-6 h-full overflow-y-auto">
           {transactions.map((transaction, index) => (
             <div key={index} className="flex items-center justify-between">
               <div className="flex items-center gap-4">
