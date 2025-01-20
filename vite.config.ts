@@ -20,7 +20,4 @@ export default defineConfig({
       jsx: "react",
     }),
   ],
-  build: {
-    outDir: "dist",
-  },
 });

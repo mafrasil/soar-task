@@ -14,7 +14,7 @@ export const handle = {
   title: "Settings",
 };
 
-export async function loader({}: Route.LoaderArgs) {
+export async function clientLoader({}: Route.LoaderArgs) {
   return {};
 }
 

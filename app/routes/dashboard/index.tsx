@@ -12,7 +12,7 @@ export const handle = {
   title: "Overview",
 };
 
-export async function loader({}: Route.LoaderArgs) {
+export async function clientLoader({}: Route.LoaderArgs) {
   const [transactions, contacts, cards, weeklyActivity, expenseStats, balanceHistory] =
     await Promise.all([
       mockData.getTransactions(),
@@ -35,7 +35,7 @@ export async function loader({}: Route.LoaderArgs) {
 
 export default function DashboardIndex() {
   const { transactions, cards, weeklyActivity, expenseStats, balanceHistory } =
-    useLoaderData<typeof loader>();
+    useLoaderData<typeof clientLoader>();
 
   return (
     <div
