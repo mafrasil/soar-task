@@ -1,5 +1,9 @@
 # Financial Dashboard
 
+## Deployment
+
+The application is deployed and can be accessed at: https://soar-task-five.vercel.app/
+
 ## Setup Instructions
 
 1. Clone repository
@@ -39,10 +43,6 @@
 2. User authentication is not implemented as it wasn't in requirements
 3. Form submissions are simulated with delays
 4. Chart data is randomly generated for demonstration
-
-## Deployment
-
-The application is deployed and can be accessed at:
 
 ## Project Organization
 
