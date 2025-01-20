@@ -90,7 +90,7 @@ export function WeeklyActivity({ data, span }: WeeklyActivityProps) {
               <Bar
                 name="Deposit"
                 dataKey="deposit"
-                fill="#4F46E5"
+                fill="#396AFF"
                 radius={[10, 10, 10, 10]}
                 barSize={20}
               />

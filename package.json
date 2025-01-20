@@ -11,6 +11,7 @@
   "dependencies": {
     "@faker-js/faker": "^9.4.0",
     "@hookform/resolvers": "^3.10.0",
+    "@radix-ui/react-dropdown-menu": "^2.1.4",
     "@radix-ui/react-popover": "1.1.4",
     "@radix-ui/react-switch": "^1.1.2",
     "@radix-ui/react-tabs": "^1.1.2",
@@ -47,6 +48,7 @@
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.10",
+    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2",
     "unplugin-icons": "^22.0.0",

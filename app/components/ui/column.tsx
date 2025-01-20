@@ -1,9 +1,9 @@
 import { cn } from "~/lib/utils";
 
 const spanClasses = {
-  1: "md:col-span-1",
-  2: "md:col-span-2",
-  3: "md:col-span-3",
+  1: "lg:col-span-1",
+  2: "lg:col-span-2",
+  3: "lg:col-span-3",
 } as const;
 
 type ColumnProps = {

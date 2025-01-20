@@ -78,18 +78,18 @@ export function EditProfile() {
   };
 
   return (
-    <div className="flex items-start gap-8">
+    <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
       {/* Profile Photo */}
-      <div className="relative w-fit">
+      <div className="relative w-fit mx-auto md:mx-0">
         <Avatar src={user?.avatar} alt="Profile" className="h-24 w-24" />
         <Button
           variant="ghost"
           size="sm"
-          className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-white shadow cursor-pointer"
+          className="absolute -bottom-1 -right-1 h-8 w-8 p-2.5 rounded-full bg-black text-white shadow cursor-pointer"
           disabled={isLoading}
           onClick={handleEditClick}
         >
-          <PencilIcon className="h-4 w-4" />
+          <PencilIcon />
         </Button>
         <input
           ref={fileInputRef}
@@ -107,7 +107,7 @@ export function EditProfile() {
       </div>
 
       {/* Form Content */}
-      <div className="flex-1">
+      <div className="flex-1 w-full">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
@@ -174,7 +174,7 @@ export function EditProfile() {
           </div>
 
           <div className="flex justify-end">
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" className="w-full sm:w-auto" disabled={isLoading}>
               {isLoading ? "Saving..." : "Save"}
             </Button>
           </div>

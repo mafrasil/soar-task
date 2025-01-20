@@ -44,7 +44,7 @@ export function BalanceHistory({ data: rawData, span }: BalanceHistoryProps) {
     <Column span={span}>
       <Title className="mb-4">Balance History</Title>
       <Card className="p-6">
-        <div className="h-[200px]">
+        <div className="h-[180px] xl:h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
@@ -54,8 +54,13 @@ export function BalanceHistory({ data: rawData, span }: BalanceHistoryProps) {
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" strokeOpacity={0.8} />
-              <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: "#94A3B8" }} />
-              <YAxis axisLine={false} tickLine={false} tick={{ fill: "#94A3B8" }} />
+              <XAxis
+                dataKey="month"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "#94A3B8", fontSize: 12 }}
+              />
+              <YAxis axisLine={false} tickLine={false} tick={{ fill: "#94A3B8", fontSize: 12 }} />
               <Area
                 type="monotone"
                 dataKey="balance"
@@ -69,6 +74,7 @@ export function BalanceHistory({ data: rawData, span }: BalanceHistoryProps) {
                   border: "1px solid #e2e8f0",
                   borderRadius: "6px",
                   padding: "8px",
+                  fontSize: "12px",
                 }}
               />
             </AreaChart>

@@ -2,7 +2,6 @@ import { Link, useLocation } from "react-router";
 import { cn } from "~/lib/utils";
 import { motion } from "framer-motion";
 
-import Dashboard from "~icons/material-symbols/dashboard";
 import Receipt from "~icons/material-symbols/receipt";
 import Person from "~icons/material-symbols/person";
 import TrendingUp from "~icons/material-symbols/trending-up";
@@ -12,11 +11,14 @@ import Build from "~icons/material-symbols/build";
 import Lightbulb from "~icons/material-symbols/lightbulb";
 import Settings from "~icons/material-symbols/settings";
 
+import Home from "~icons/mingcute/home-3-fill";
+import TaskFill from "~icons/mingcute/task-fill";
+
 const navigation = [
   {
     name: "Dashboard",
     href: "/",
-    icon: () => <Dashboard />,
+    icon: () => <Home />,
   },
   {
     name: "Transactions",
@@ -72,19 +74,19 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     <>
       {/* Mobile overlay */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" onClick={onClose} />
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 2xl:hidden" onClick={onClose} />
       )}
 
       <div
         className={cn(
-          `fixed top-0 flex h-screen md:h-full w-64 flex-col border-r border-gray-200 bg-base z-50
-          transition-transform duration-300`,
-          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+          `fixed top-0 flex h-screen w-64 flex-col border-r border-gray-200 bg-white z-50 transition-transform
+          duration-300`,
+          isOpen ? "translate-x-0" : "-translate-x-full 2xl:translate-x-0"
         )}
       >
         {/* Close button for mobile */}
         <button
-          className="md:hidden absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full"
+          className="2xl:hidden absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full"
           onClick={onClose}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,9 +100,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </button>
 
         {/* Logo section */}
-        <div className="flex h-16 items-center gap-2 px-6">
-          <div className="rounded bg-primary p-1"></div>
-          <span className="text-navy-700 text-xl font-semibold">Soar Task</span>
+        <div className="flex py-5 items-center gap-2 px-6">
+          <TaskFill className="text-text text-2xl" />
+          <span className="text-primary text-2xl font-bold">Soar Task</span>
         </div>
 
         {/* Navigation */}

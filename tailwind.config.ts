@@ -5,7 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: "var(--base)",
+        text: "var(--text)",
+        placeholder: "var(--placeholder)",
         background: "var(--background)",
         foreground: "var(--foreground)",
         input: "var(--input)",
@@ -30,5 +31,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 } satisfies Config;

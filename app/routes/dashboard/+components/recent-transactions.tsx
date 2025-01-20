@@ -20,7 +20,20 @@ const ICONS = {
 export function RecentTransactions({ transactions, span }: RecentTransactionsProps) {
   return (
     <Column span={span}>
-      <Title className="mb-4">Recent Transaction</Title>
+      <div role="region" aria-label="Recent Transactions">
+        <Title className="mb-4">Recent Transactions</Title>
+        <div role="list" aria-label="Transaction list">
+          {transactions.map((transaction) => (
+            <div
+              key={transaction.id}
+              role="listitem"
+              aria-label={`${transaction.title} - ${transaction.amount}`}
+            >
+              {/* ... existing content ... */}
+            </div>
+          ))}
+        </div>
+      </div>
       <TransactionList
         transactions={transactions.map((transaction) => ({
           ...transaction,

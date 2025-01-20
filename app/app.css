@@ -2,15 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 :root {
   --base: #ffffff;
+  --text: #000000;
 
   /* Base colors */
   --background: #f5f7fa;
   --foreground: #718ebf;
 
   /* UI Elements */
-  --input: #edf1f7;
+  --input: #f5f7fa;
+  --placeholder: #8ba3cb;
   --button: #232323;
   --border: #dfeaf2;
 
@@ -24,6 +31,7 @@
 }
 
 .dark {
+  --text: #ffffff;
   --base: #111827;
 }
 

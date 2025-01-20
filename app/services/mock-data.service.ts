@@ -6,7 +6,7 @@ export const mockData = {
     return Array.from({ length: 5 }, () => ({
       id: faker.string.uuid(),
       icon: faker.helpers.arrayElement(["credit-card", "paypal", "dollar"]),
-      title: faker.finance.transactionDescription(),
+      title: `${faker.helpers.arrayElement(["Deposit from", "Payment via", "Transfer from"])} ${faker.helpers.arrayElement(["PayPal", "Card", "Bank Account", "Wise", "Revolut"])}`,
       date: faker.date.recent().toLocaleDateString(),
       amount: faker.number.int({ min: -2000, max: 5000 }),
     }));

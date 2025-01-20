@@ -21,12 +21,10 @@ export default function RootLayout() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(true)} title={title} />
-      <main className="flex-1 grid md:grid-cols-[256px_1fr]">
-        <aside>
-          <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-        </aside>
-        <div className="flex-1">
-          <div className="container mx-auto">
+      <main className="flex-1">
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+        <div className="2xl:ml-64 transition-[margin] duration-300">
+          <div className="2xl:container mx-auto">
             <Outlet />
           </div>
         </div>

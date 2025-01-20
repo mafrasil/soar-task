@@ -20,13 +20,19 @@ export async function loader({}: Route.LoaderArgs) {
 
 export default function Settings() {
   return (
-    <div className="p-10">
-      <Card className="p-6">
-        <Tabs defaultValue="profile" className="space-y-6">
-          <Tabs.List className="border-b border-slate-200 w-full">
-            <Tabs.Trigger value="profile">Edit Profile</Tabs.Trigger>
-            <Tabs.Trigger value="preferences">Preferences</Tabs.Trigger>
-            <Tabs.Trigger value="security">Security</Tabs.Trigger>
+    <div className="p-4 sm:p-6 xl:p-10">
+      <Card className="p-4 sm:p-6">
+        <Tabs defaultValue="profile" className="space-y-4 sm:space-y-6">
+          <Tabs.List className="border-b border-slate-200 w-full flex scrollbar-none overflow-x-auto">
+            <Tabs.Trigger value="profile" className="whitespace-nowrap">
+              Edit Profile
+            </Tabs.Trigger>
+            <Tabs.Trigger value="preferences" className="whitespace-nowrap">
+              Preferences
+            </Tabs.Trigger>
+            <Tabs.Trigger value="security" className="whitespace-nowrap">
+              Security
+            </Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="profile">
             <EditProfile />

@@ -6,7 +6,7 @@ import { Title } from "~/components/ui/title";
 import { cn } from "~/lib/utils";
 import { Column } from "~/components/ui/column";
 import React from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, SendIcon } from "lucide-react";
 import { mockData } from "~/services/mock-data.service";
 
 type Contact = {
@@ -21,15 +21,18 @@ type QuickTransferProps = {
 };
 
 export function QuickTransfer({ span }: QuickTransferProps) {
-  const [amount, setAmount] = React.useState("525.50");
+  const [amount, setAmount] = React.useState<number>(525.5);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [contacts, setContacts] = React.useState<Contact[]>([]);
+  const [selectedContact, setSelectedContact] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    // Fetch contacts when component mounts
     const loadContacts = async () => {
       const data = await mockData.getContacts();
       setContacts(data);
+      if (data.length > 0) {
+        setSelectedContact(data[0].id);
+      }
     };
     loadContacts();
   }, []);
@@ -49,27 +52,40 @@ export function QuickTransfer({ span }: QuickTransferProps) {
   return (
     <Column span={span}>
       <Title className="mb-4">Quick Transfer</Title>
-      <Card className="p-6">
+      <Card className="px-4 py-8">
         <div className="space-y-6">
           {/* Contact List */}
-          <div className="relative flex">
-            <div className="flex-1 overflow-hidden">
+          <div className="relative flex" role="region" aria-label="Contact Selection">
+            <div className="flex-1 overflow-hidden" role="listbox" aria-label="Contact List">
               <div
                 className="flex gap-2 transition-transform duration-300 ease-in-out pl-0"
                 style={{ transform: `translateX(-${currentPage * 100}%)` }}
               >
                 {contacts.map((contact) => (
-                  <div key={contact.id} className="text-center flex-shrink-0 w-[32%]">
+                  <div
+                    key={contact.id}
+                    role="option"
+                    aria-selected={selectedContact === contact.id}
+                    className="text-center flex-shrink-0 w-[32%] cursor-pointer"
+                    onClick={() => setSelectedContact(contact.id)}
+                  >
                     <Avatar
                       src={contact.avatar}
                       alt={contact.name}
-                      className="size-20 mx-auto mb-2"
+                      className="size-12 lg:size-14 xl:size-[4.5rem] mx-auto mb-2"
                     />
-                    <div className="font-medium text-sm">{contact.name}</div>
                     <div
                       className={cn(
-                        "text-xs text-slate-500",
-                        contact.role.toLowerCase() === "ceo" && "font-semibold"
+                        "text-xs text-text truncate",
+                        selectedContact === contact.id && "font-bold"
+                      )}
+                    >
+                      {contact.name}
+                    </div>
+                    <div
+                      className={cn(
+                        "text-xs text-placeholder",
+                        selectedContact === contact.id && "font-bold"
                       )}
                     >
                       {contact.role}
@@ -78,48 +94,39 @@ export function QuickTransfer({ span }: QuickTransferProps) {
                 ))}
               </div>
             </div>
-            <div className="flex items-center pl-2">
-              <button
-                onClick={handleNextPage}
-                className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200
-                  transition-colors"
-              >
-                <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
-            </div>
+            <button
+              onClick={handleNextPage}
+              aria-label="Show next contacts"
+              className="rounded-full size-10 shadow-xl flex justify-center items-center flex-shrink-0"
+            >
+              <ChevronRight className="size-5" />
+            </button>
           </div>
 
           {/* Transfer Input */}
-          <div className="flex items-center gap-4">
-            <span className="text-blue-400">Write Amount</span>
-            <div className="flex-1">
+          <div className="flex items-center gap-4 px-4 pt-2">
+            <span className="text-placeholder hidden xl:flex items-center gap-1 text-xs xl:text-sm">
+              Amount
+            </span>
+            <div className="flex-1 flex items-center relative">
               <Input
-                type="text"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="text-2xl font-medium bg-slate-50"
+                type="number"
+                step="0.01"
+                min="0"
+                rounded="full"
+                className="text-base [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none
+                  [&::-webkit-inner-spin-button]:appearance-none"
+                value={amount.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  useGrouping: false,
+                })}
+                onChange={(e) => setAmount(Number(e.target.value))}
               />
+              <Button className="rounded-full absolute gap-2 right-0 py-3 px-4 2xl:px-8 text-sm font-medium">
+                Send <SendIcon className="size-4" />
+              </Button>
             </div>
-            <Button className="flex items-center gap-2 px-6 bg-black text-white hover:bg-black/90 rounded-full">
-              Send
-              <span className="inline-block rotate-45">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 12H19M19 12L12 5M19 12L12 19"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </Button>
           </div>
         </div>
       </Card>

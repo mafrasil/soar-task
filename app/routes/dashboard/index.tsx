@@ -38,8 +38,12 @@ export default function DashboardIndex() {
     useLoaderData<typeof loader>();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 p-6 sm:p-10">
-      <div className="md:col-span-2">
+    <div
+      role="main"
+      aria-label="Dashboard Overview"
+      className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 p-6 lg:p-10"
+    >
+      <div className="lg:col-span-2">
         <div className="w-full">
           <MyCards cards={cards} span={2} />
         </div>

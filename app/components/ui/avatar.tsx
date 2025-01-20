@@ -10,7 +10,7 @@ interface AvatarProps {
 export function Avatar({ src, alt, size = "md", className }: AvatarProps) {
   const name = alt.charAt(0);
   const sizeStyles =
-    size === "sm" ? "w-8 h-8 text-xs" : size === "md" ? "w-10 h-10 text-sm" : "w-12 h-12 text-base";
+    size === "sm" ? "size-8 text-xs" : size === "md" ? "size-12 text-sm" : "size-14 text-base";
 
   const baseStyles = cn("rounded-full", sizeStyles, className);
 
