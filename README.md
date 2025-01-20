@@ -22,7 +22,7 @@
 - TailwindCSS
 - Recharts
 - Zustand
-- React Router
+- React Router 7 (Vite)
 - Zod
 
 ## Architecture Highlights

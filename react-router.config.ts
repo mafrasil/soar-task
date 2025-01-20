@@ -1,7 +1,9 @@
 import type { Config } from "@react-router/dev/config";
 
 export default {
-  // Config options...
-  // Server-side render by default, to enable SPA mode set this to `false`
-  ssr: true,
+  appDirectory: "src",
+  ssr: false, // Disable SSR since this is a SPA
+  async buildEnd({ buildManifest }) {
+    // Optional
+  },
 } satisfies Config;
